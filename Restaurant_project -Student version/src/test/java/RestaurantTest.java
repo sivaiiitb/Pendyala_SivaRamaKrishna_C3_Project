@@ -32,7 +32,7 @@ class RestaurantTest {
         LocalTime testTimeRestaurant_open = LocalTime.parse("11:30:00");
         Restaurant spiedRestaurant = Mockito.spy(restaurant) ;
         Mockito.when(spiedRestaurant.getCurrentTime()).thenReturn(testTimeRestaurant_open) ;
-        Assertions.assertTrue(spiedRestaurant.isRestaurantOpen());
+        Assertions.assertEquals(spiedRestaurant.isRestaurantOpen());
     }
 
     @Test
@@ -69,6 +69,13 @@ class RestaurantTest {
         assertThrows(itemNotFoundException.class,
                 ()->restaurant.removeFromMenu("French fries"));
     }
-    //<<<<<<<<<<<<<<<<<<<<<<<MENU>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+    @Test
+    public void select_items_from_list_should_return_order_cost(){
+
+        int totalCost;
+        List<String> selectedItems = Arrays.asList("Sweet corn soup", "Vegetable lasagne" ) ;
+        totalCost = restaurant.getTotalCost(selectedItems) ;
+        assertEquals(388, totalCost);
+    }
 
 }
